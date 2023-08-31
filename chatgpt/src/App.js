@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import "./App.css";
 
+
+
 function App() {
   const [uploadedImage, setUploadedImage] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [searchQuery, setSearchQuery] = useState(""); // New state for search query
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -19,54 +22,59 @@ function App() {
   };
 
   const handleSignUp = () => {
-   
+    // Implement your sign-up logic here
   };
 
   const handleLogin = () => {
-    // Handle user login logic here
-    // Example: Make API request to your backend to authenticate the user
-    // If successful, set isAuthenticated to true
-    setIsAuthenticated(true)
+    setIsAuthenticated(true);
+  };
+
+  const handleUpload = () => {
+    // Implement your upload logic here
+  };
+
+  const handleSearch = () => {
+    // Implement your search logic using the 'searchQuery' state
+    console.log("Search Query:", searchQuery);
   };
 
   return (
     <div className="App">
-    <aside className="sidemenu">
-      <div className="smbuton">
-        <div className="logo">
-          {" "}
-          <p>COMPANY NAME</p>
+      {/* ... */}
+      
+      <aside className="sidemenu"><h3>COMPANY NAME</h3></aside>
+      <section className="chatbox">
+        <div className="newfile">
+          <span>New File</span>
+          <br />
+          <br />
+          <span>New Project</span>
         </div>
-      </div>
-    </aside>
-    <section className="chatbox">
-        <div className="inpholder">
-          <label htmlFor="file-input" className="upload-button">
-            Choose File
-          </label>
-          <input
-            type="file"
-            accept="image/*"
-            className="file-input"
-            id="file-input"
-            onChange={handleImageChange}
-          />
-          {uploadedImage && (
-            <div className="uploaded-image">
-              <img
-                style={{ width: "400px", height: "200px" }}
-                src={uploadedImage}
-                alt="Uploaded"
-              />
-            </div>
-          )}
-
+        <div className="signup">
           {isAuthenticated ? (
-            <button className="upload">UPLOAD</button>
+            uploadedImage ? (
+              <button className="upload-b" onClick={handleUpload}>
+                UPLOAD
+              </button>
+            ) : (
+              <>
+                <label htmlFor="file-input" className="upload-button">
+                  Choose File
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="file-input"
+                  id="file-input"
+                  onChange={handleImageChange}
+                />
+              </>
+            )
           ) : (
-            <><div className="sidemenu" id="signin">
-               <input
+            <>
+              <input
                 type="email"
+                className="sign"
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -74,24 +82,54 @@ function App() {
               <br />
               <input
                 type="password"
+                className="sign"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <br />
-              <button className="auth-button" onClick={handleSignUp}>
-                Sign Up
-              </button>
-            </div>
-             <br />
-              <div className="sidemenu" id="login"> <button className="auth-button" onClick={handleLogin}>
-                Login
-              </button></div>
-             
+              <div className="login">
+                <button className="auth-button" onClick={handleSignUp}>
+                  Sign Up
+                </button>
+                <br />
+                <button className="auth-button" onClick={handleLogin}>
+                  Login
+                </button>
+              </div>
             </>
           )}
+        </div>
 
-          <textarea rows="1" className="chattext"></textarea>
+        <div className="inpholder">
+      
+          {uploadedImage && (
+            <div className="uploaded-image">
+              <img
+                style={{ width: "400px", height: "200px" }}
+                src={uploadedImage}
+                
+              />
+           
+            </div>
+          )}
+          <div className="chattext">
+           
+            <button className="search-button" onClick={handleSearch}>
+        
+            </button>
+            
+         
+            <input
+            
+              type="text"
+              className="search-bar"
+              placeholder=""
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}   
+             
+            /> 
+          </div>
+        
         </div>
       </section>
     </div>
