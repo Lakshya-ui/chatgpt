@@ -19,15 +19,14 @@ function App() {
   };
 
   const handleSignUp = () => {
-    // Handle user sign-up logic here
-    // Example: Make API request to your backend to register the user
+   
   };
 
   const handleLogin = () => {
     // Handle user login logic here
     // Example: Make API request to your backend to authenticate the user
     // If successful, set isAuthenticated to true
-    setIsAuthenticated(true);
+    setIsAuthenticated(true)
   };
 
   return (
